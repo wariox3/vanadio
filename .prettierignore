@@ -1,0 +1,16 @@
+# Ignorar estas carpetas
+dist/
+node_modules/
+coverage/
+src/metronic/
+src/assets
+*.md
+*.json
+
+# Ignorar archivos específicos
+package-lock.json
+angular.json
+
+# Ignorar archivos de configuración
+.eslintrc.json
+.prettierrc

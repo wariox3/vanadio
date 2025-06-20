@@ -1,0 +1,15 @@
+.fixed-header-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.fixed-header-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.tabla-responsiva {
+  height: calc(100vh - 35rem);
+  min-height: 25rem;
+}

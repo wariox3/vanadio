@@ -1,0 +1,75 @@
+<div
+  class="flex h-[100vh] justify-center items-center p-8 lg:p-10 order-2 lg:order-1 login-container"
+>
+  <div class="card max-w-[400px] w-full">
+    <form
+      class="card-body flex flex-col gap-5 p-10"
+      id="sign_in_form"
+      method="get"
+      [formGroup]="formularioLogin"
+    >
+      <div class="text-center mb-2.5">
+        <h3 class="text-lg font-medium text-gray-900 leading-none mb-2.5">Ingresar</h3>
+        <div class="flex items-center justify-center">
+          <span class="text-2sm text-gray-700 me-1.5"> ¿Necesitas una cuenta? </span>
+          <a class="text-2sm link" routerLink="/auth/register"> Registrarse </a>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <app-label> Email </app-label>
+        <app-input
+          placeholder="Ingresa tu correo"
+          formControlName="username"
+          [control]="formularioLogin.get('username')"
+          [errors]="{
+            required: 'El correo es requerido.',
+            email: 'Ingresa un correo válido.',
+          }"
+        ></app-input>
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <app-label> Contraseña </app-label>
+        <app-input
+          placeholder="**********"
+          type="password"
+          formControlName="password"
+          [control]="formularioLogin.get('password')"
+          [errors]="{
+            required: 'La contraseña es requerida.',
+          }"
+        ></app-input>
+        <a class="text-2sm link shrink-0" routerLink="/auth/reset-password">
+          ¿Olvidaste tu contraseña?
+        </a>
+      </div>
+
+      <label class="checkbox-group">
+        <input class="checkbox checkbox-sm" name="check" type="checkbox" value="1" />
+        <span class="checkbox-label"> Recuerdame </span>
+      </label>
+
+      @if (isProduction) {
+        <div class="flex justify-center">
+          <ngx-turnstile
+            [siteKey]="turnstileToken"
+            (resolved)="onTurnstileSuccess($event)"
+          ></ngx-turnstile>
+        </div>
+      }
+
+      <app-advanced-button
+        [text]="'Iniciar sesión'"
+        [loadingText]="'Iniciando sesión...'"
+        [type]="'button'"
+        [color]="'primary'"
+        [size]="'md'"
+        [classes]="'btn btn-primary w-full text-center justify-center'"
+        [isLoading]="isLoading$ | async"
+        [isDisabled]="!formularioLogin.valid"
+        (buttonClick)="login()"
+      ></app-advanced-button>
+    </form>
+  </div>
+</div>

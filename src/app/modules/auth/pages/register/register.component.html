@@ -1,0 +1,85 @@
+<div class="flex h-[100vh] justify-center items-center p-8 lg:p-10 order-2 lg:order-1">
+  <div class="card max-w-[400px] w-full">
+    <form
+      [formGroup]="formularioRegister"
+      class="card-body flex flex-col gap-5 p-10"
+      id="sign_up_form"
+      method="post"
+    >
+      <div class="text-center mb-2.5">
+        <h3 class="text-lg font-medium text-gray-900 leading-none mb-2.5">Registrarse</h3>
+        <div class="flex items-center justify-center">
+          <span class="text-2sm text-gray-700 me-1.5"> ¿Ya tiene una cuenta? </span>
+          <a class="text-2sm link" routerLink="/auth/login"> Iniciar sesión </a>
+        </div>
+      </div>
+      <div class="flex flex-col gap-1">
+        <label class="form-label text-gray-900"> Email </label>
+        <app-input
+          placeholder="Ingresa tu correo"
+          formControlName="username"
+          [control]="formularioRegister.get('username')"
+          [errors]="{
+            required: 'El correo es requerido.',
+            email: 'Ingresa un correo válido.',
+          }"
+        ></app-input>
+      </div>
+      <div class="flex flex-col gap-1">
+        <label class="form-label font-normal text-gray-900"> Contraseña </label>
+        <app-input
+          placeholder="**********"
+          type="password"
+          formControlName="password"
+          [control]="formularioRegister.get('password')"
+          [errors]="{
+            required: 'La contraseña es requerida.',
+            minlength: 'La contraseña debe tener al menos 3 caracteres.',
+          }"
+        ></app-input>
+      </div>
+      <div class="flex flex-col gap-1">
+        <label class="form-label font-normal text-gray-900"> Confirmar contraseña </label>
+        <app-input
+          placeholder="**********"
+          type="password"
+          formControlName="confirmarContrasena"
+          [control]="formularioRegister.get('confirmarContrasena')"
+          [errors]="{
+            required: 'La contraseña es requerida.',
+            notMatching: 'Las contraseñas no coinciden.',
+          }"
+        ></app-input>
+      </div>
+      <label class="checkbox-group">
+        <input
+          formControlName="terminoCondicion"
+          class="checkbox checkbox-sm"
+          name="check"
+          type="checkbox"
+          value="1"
+        />
+        <span class="checkbox-label">
+          Acepto
+          <a routerLink="/terminos_de_uso" class="text-2sm link" target="_blank"> Terminos </a>
+          &
+          <a routerLink="/politicas_privacidad" class="text-2sm link" target="_blank">
+            Condiciones
+          </a>
+        </span>
+      </label>
+
+      <app-advanced-button
+        [text]="'Crear cuenta'"
+        [loadingText]="'Creando...'"
+        [type]="'button'"
+        [color]="'primary'"
+        [size]="'md'"
+        [classes]="'btn btn-primary w-full text-center justify-center'"
+        [isLoading]="registrando()"
+        [isDisabled]="!this.formularioRegister.valid"
+        (buttonClick)="register()"
+      ></app-advanced-button>
+    </form>
+  </div>
+</div>

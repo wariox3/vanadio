@@ -1,0 +1,66 @@
+{
+    "root": true,
+    "ignorePatterns": [
+        "projects/**/*",
+        "dist/",
+        "src/assets/",
+        "src/metronic/",
+        "node_modules/",
+        "coverage/",
+        "*.js"
+    ],
+    "overrides": [
+        {
+            "files": [
+                "*.ts"
+            ],
+            "parserOptions": {
+                "project": [
+                    "tsconfig.json"
+                ],
+                "createDefaultProgram": true
+            },
+            "extends": [
+                "eslint:recommended",
+                "plugin:@typescript-eslint/recommended",
+                "plugin:@angular-eslint/recommended",
+                "plugin:@angular-eslint/template/process-inline-templates",
+                "plugin:prettier/recommended" // Añade esta línea al final
+            ],
+            "rules": {
+                "@angular-eslint/component-selector": [
+                    "error",
+                    {
+                        "type": "element",
+                        "prefix": "app",
+                        "style": "kebab-case"
+                    }
+                ],
+                "@angular-eslint/directive-selector": [
+                    "error",
+                    {
+                        "type": "attribute",
+                        "prefix": "app",
+                        "style": "camelCase"
+                    }
+                ],
+                // Desactiva reglas de formato que manejará Prettier
+                "indent": "off",
+                "quotes": "off",
+                "semi": "off",
+                // Desactiva la regla que prohíbe el uso de 'any'
+                "@typescript-eslint/no-explicit-any": "off"
+            }
+        },
+        {
+            "files": [
+                "*.html"
+            ],
+            "extends": [
+                "plugin:@angular-eslint/template/recommended",
+                "plugin:prettier/recommended"
+            ],
+            "rules": {}
+        }
+    ]
+}

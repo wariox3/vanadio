@@ -1,0 +1,51 @@
+<ng-container>
+  <!-- begin: container -->
+  <div class="container-fixed flex justify-between items-stretch lg:gap-4" id="header_container">
+    <div class="flex gap-1 lg:hidden items-center -ml-1">
+      <a class="shrink-0" href="html/demo1.html">
+        <img class="max-h-[25px] w-full" src="assets/media/app/mini-logo.svg" />
+      </a>
+      <div class="flex items-center">
+        <button class="btn btn-icon btn-light btn-clear btn-sm" data-drawer-toggle="#sidebar">
+          <i class="ki-filled ki-menu"> </i>
+        </button>
+        <button
+          class="btn btn-icon btn-light btn-clear btn-sm"
+          data-drawer-toggle="#megamenu_wrapper"
+        >
+          <i class="ki-filled ki-burger-menu-2"> </i>
+        </button>
+      </div>
+    </div>
+    <div class="flex items-stretch" id="megamenu_container">
+      <div
+        class="flex items-stretch"
+        data-reparent="true"
+        data-reparent-mode="prepend|lg:prepend"
+        data-reparent-target="body|lg:#megamenu_container"
+      >
+        <div
+          class="hidden lg:flex lg:items-stretch"
+          data-drawer="true"
+          data-drawer-class="drawer drawer-start fixed z-10 top-0 bottom-0 w-full mr-5 max-w-[250px] p-5 lg:p-0 overflow-auto"
+          data-drawer-enable="true|lg:false"
+          id="megamenu_wrapper"
+        >
+          <div
+            class="menu flex-col lg:flex-row gap-5 lg:gap-7.5"
+            data-menu="true"
+            id="megamenu"
+          ></div>
+        </div>
+      </div>
+    </div>
+    <app-menu
+      [titulo]="'John doe'"
+      [subtitulo]="'description'"
+      [menuItems]="menuItems"
+      [imagen]="''"
+    ></app-menu>
+    `
+  </div>
+  <!-- end: container -->
+</ng-container>

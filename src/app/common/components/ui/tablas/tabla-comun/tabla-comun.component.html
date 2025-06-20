@@ -1,0 +1,84 @@
+<div class="card-table border-t">
+  <div data-datatable="true" data-datatable-page-size="5">
+    <div class="fixed-header-table scrollable">
+      <table class="table table-border text-sm" data-datatable-table="true">
+        <thead class="sticky-header">
+          <tr>
+            <th *ngFor="let item of encabezados">
+              {{ item.encabezado }}
+            </th>
+            <th class="w-[60px]"></th>
+            <th class="w-[60px]"></th>
+            <th class="w-[60px]">
+              <input
+                #checkboxGlobal
+                class="checkbox checkbox-sm"
+                data-datatable-check="true"
+                type="checkbox"
+                (change)="manejarCheckGlobal($event)"
+              />
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of datos; track $index) {
+            <tr>
+              @for (encabezado of encabezados; track $index) {
+                <td>
+                  <app-tabla-campo
+                    [datoCampo]="item[encabezado.campoNombre]"
+                    [tipoCampo]="encabezado.campoTipo"
+                  ></app-tabla-campo>
+                </td>
+              }
+              <td>
+                <button
+                  (click)="editarItem(item.id)"
+                  class="btn btn-sm btn-icon btn-clear btn-light"
+                  href="#"
+                >
+                  <i class="ki-filled ki-notepad-edit"> </i>
+                </button>
+              </td>
+              <td>
+                <button
+                  (click)="detalleItem(item.id)"
+                  class="btn btn-sm btn-icon btn-clear btn-light"
+                  href="#"
+                >
+                  <i class="ki-filled ki-eye"> </i>
+                </button>
+              </td>
+              <td class="w-[60px]">
+                <input
+                  class="checkbox checkbox-sm"
+                  data-datatable-check="true"
+                  type="checkbox"
+                  (change)="manejarCheckItem($event, item.id)"
+                  [checked]="estoyEnListaEliminar(item.id)"
+                />
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+      <!-- <div
+        class="card-footer justify-center md:justify-between flex-col md:flex-row gap-3 text-gray-600 text-2sm font-medium"
+      >
+        <div class="flex items-center gap-2">
+          Show
+          <select
+            class="select select-sm w-16"
+            data-datatable-size="true"
+            name="perpage"
+          ></select>
+          per page
+        </div>
+        <div class="flex items-center gap-4">
+          <span data-datatable-info="true"> </span>
+          <div class="pagination" data-datatable-pagination="true"></div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>

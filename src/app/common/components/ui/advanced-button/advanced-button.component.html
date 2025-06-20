@@ -1,0 +1,50 @@
+<button
+  (click)="handleClick()"
+  [className]="classes"
+  [ngClass]="{
+    'btn-primary': color === 'primary' && !outline,
+    'btn-secondary': color === 'secondary' && !outline,
+    'btn-success': color === 'success' && !outline,
+    'btn-danger': color === 'danger' && !outline,
+    'btn-warning': color === 'warning' && !outline,
+    'btn-info': color === 'info' && !outline,
+    'btn-light': color === 'light' && !outline,
+    'btn-dark': color === 'dark' && !outline,
+    'btn-outline-primary': color === 'primary' && outline,
+    'btn-outline-secondary': color === 'secondary' && outline,
+    'btn-outline-success': color === 'success' && outline,
+    'btn-outline-danger': color === 'danger' && outline,
+    'btn-outline-warning': color === 'warning' && outline,
+    'btn-outline-info': color === 'info' && outline,
+    'btn-outline-light': color === 'light' && outline,
+    'btn-outline-dark': color === 'dark' && outline,
+    'btn-sm': size === 'sm',
+    'btn-lg': size === 'lg',
+    'rounded-pill': rounded,
+    'w-100': block,
+    'btn-icon': iconOnly,
+  }"
+  class="btn d-inline-flex align-items-center justify-content-center gap-2"
+  [type]="type"
+  [disabled]="isLoading || isDisabled"
+>
+  @if (isLoading) {
+    <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+    @if (loadingText) {
+      {{ loadingText }}
+    }
+  } @else {
+    @if (iconLeft && !iconOnly) {
+      <i class="{{ iconLeft }}"></i>
+    }
+    @if (!iconOnly) {
+      {{ text }}
+    }
+    @if (iconOnly) {
+      <i class="{{ iconLeft || iconRight }}"></i>
+    }
+    @if (iconRight && !iconOnly) {
+      <i class="{{ iconRight }}"></i>
+    }
+  }
+</button>
