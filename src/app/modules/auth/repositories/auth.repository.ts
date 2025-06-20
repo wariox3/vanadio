@@ -12,7 +12,12 @@ export class AuthRepository {
   private httpBase = inject(HttpBaseRepository);
 
   login(credenciales: Login) {
-    return this.httpBase.post<LoginResponse>('seguridad/login/', credenciales);
+    return this.httpBase.post<LoginResponse>('seguridad/login/', {
+      username: credenciales.username,
+      password: credenciales.password,
+      cf_turnstile_response: credenciales.cfTurnstileResponse,
+      proyecto: credenciales.proyecto,
+    });
   }
 
   register(usuario: Register) {
