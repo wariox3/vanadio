@@ -12,7 +12,12 @@ export class AuthRepository {
   private httpBase = inject(HttpBaseRepository);
 
   login(credenciales: Login) {
-    return this.httpBase.post<LoginResponse>('seguridad/login/', credenciales);
+    return this.httpBase.post<LoginResponse>('seguridad/login/', {
+      username: credenciales.username,
+      password: credenciales.password,
+      cf_turnstile_response: credenciales.cfTurnstileResponse,
+      proyecto: credenciales.proyecto,
+    });
   }
 
   register(usuario: Register) {
@@ -28,52 +33,4 @@ export class AuthRepository {
       }
     );
   }
-
-  // recuperarClave(email: string) {
-  //   return this.http.post(
-  //     `${environment.url_api}/seguridad/usuario/cambio-clave-solicitar/`,
-  //     { username: email, accion: "clave" },
-  //     { context: noRequiereToken() }
-  //   );
-  // }
-
-  // cargarImagen(usuario_id: Number | string, imagenB64: string) {
-  //   return this.http.post<{
-  //     cargar: boolean;
-  //     imagen: string;
-  //   }>(`${environment.url_api}/seguridad/usuario/cargar-imagen/`, {
-  //     usuario_id,
-  //     imagenB64,
-  //   });
-  // }
-
-  // eliminarImagen(usuario_id: Number | string) {
-  //   return this.http.post<{
-  //     limpiar: boolean;
-  //     imagen: string;
-  //   }>(`${environment.url_api}/seguridad/usuario/limpiar-imagen/`, {
-  //     usuario_id,
-  //   });
-  // }
-
-  // actualizarInformacion(data: enviarDatosUsuario) {
-  //   return this.http.put<UsuarioInformacionPerfil>(
-  //     `${environment.url_api}/seguridad/usuario/${data.id}/`,
-  //     {
-  //       nombre: data.nombre,
-  //       apellido: data.apellido,
-  //       nombre_corto: data.nombreCorto,
-  //       telefono: data.telefono,
-  //       idioma: data.idioma,
-  //       cargo: data.cargo,
-  //       numero_identificacion: data.numero_identificacion,
-  //     },
-  //   );
-  // }
-
-  // perfil(codigoUsuario: number) {
-  //   return this.http.get<UsuarioInformacionPerfil>(
-  //     `${environment.url_api}/seguridad/usuario/${codigoUsuario}/`,
-  //   );
-  // }
 }

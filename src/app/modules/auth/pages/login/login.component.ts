@@ -8,8 +8,8 @@ import { RouterLink } from '@angular/router';
 import { AdvancedButtonComponent } from '@app/common/components/ui/advanced-button/advanced-button.component';
 import { selectIsLoading } from '../../store/selectors/auth.selector';
 import { AsyncPipe } from '@angular/common';
-import { NgxTurnstileModule } from 'ngx-turnstile';
 import { environment } from '@environments/environment';
+import { NgxTurnstileModule } from 'ngx-turnstile';
 
 @Component({
   selector: 'app-login',
@@ -20,8 +20,8 @@ import { environment } from '@environments/environment';
     InputComponent,
     LabelComponent,
     AdvancedButtonComponent,
-    NgxTurnstileModule,
     AsyncPipe,
+    NgxTurnstileModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
@@ -30,15 +30,15 @@ import { environment } from '@environments/environment';
 export default class LoginComponent implements OnInit {
   private store = inject(Store);
   public isLoading$ = this.store.select(selectIsLoading);
-
-  public isProduction = environment.production;
+  public isProduction: boolean = environment.production;
   public turnstileSiteKey: string = environment.turnstileSiteKey;
   public turnstileToken: string = '';
+
   public formularioLogin = new FormGroup({
     username: new FormControl('', [Validators.email, Validators.required]),
     password: new FormControl('', [Validators.required]),
     cf_turnstile_response: new FormControl(''),
-    proyecto: new FormControl('TURNOS'),
+    proyecto: new FormControl('CUENTA'),
   });
 
   ngOnInit(): void {
@@ -53,6 +53,8 @@ export default class LoginComponent implements OnInit {
         credentials: {
           username: this.formularioLogin.value.username,
           password: this.formularioLogin.value.password,
+          cfTurnstileResponse: this.formularioLogin.value.cf_turnstile_response,
+          proyecto: this.formularioLogin.value.proyecto,
         },
       })
     );
