@@ -1,4 +1,4 @@
-# Metronic Angular Tailwind Boilerplate
+# Turnos.Reddoc
 
 [![Angular Version](https://img.shields.io/badge/Angular-17.3.0-%23DD0031?logo=angular)](https://angular.io/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.4-%2338B2AC?logo=tailwindcss)](https://tailwindcss.com/)
